@@ -1,8 +1,12 @@
 class Solution {
     fun maxScore(cardPoints: IntArray, k: Int): Int {
         val dp = IntArray(k/2+1){0}
-        val start = cardPoints.take(k).toMutableList()
-        val end = cardPoints.takeLast(k).toMutableList()
+	val start = cardPoints.copyOf()
+	val end = cardPoints.copyOf()
+
+	// 아래는 속도가 엄청 느리다,, 정확한 timeComplexity 는 잘 모르겠음
+     //   val start = cardPoints.take(k).toMutableList()
+     //   val end = cardPoints.takeLast(k).toMutableList()
         
         end.reverse()
         
