@@ -1,18 +1,18 @@
 class Solution {
     fun evalRPN(tokens: Array<String>): Int {
-        val stack = mutableListOf<String>()
+        val stack = mutableListOf<Int>()
         
         for(t in tokens) {
-            if (t.isDigit()) stack.add(t)
+            if (t.isDigit()) stack.add(t.toInt())
             else {
                 val op2 = stack.pop()
                 val op1 = stack.pop()
 
-                stack.add(calculate(op1, op2, t).toString())
+                stack.add(calculate(op1, op2, t))
             }
         }
         
-        return stack.first().toInt()
+        return stack.first()
     }
     
     fun String.isDigit() : Boolean {
@@ -25,12 +25,12 @@ class Solution {
         return true
     }
     
-    fun MutableList<String>.pop() : Int {
+    fun MutableList<Int>.pop() : Int {
         val item = this.lastOrNull()
         if (!isEmpty()){
             this.removeAt(this.size -1)
         }
-        return item?.toInt() ?: 0
+        return item ?: 0
     }
     
     fun calculate(op1 : Int, op2: Int, oper: String) = when(oper) {
